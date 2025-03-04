@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
 import pickle
+import os
 import pandas as pd
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -29,4 +32,5 @@ def predict():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
+    app.run(host="0.0.0.0", port=port)
